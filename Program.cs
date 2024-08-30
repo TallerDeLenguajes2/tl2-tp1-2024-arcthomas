@@ -15,7 +15,7 @@ foreach (var linea in lineas)
 {
     var valores = linea.Split(';');
     cadeteriaCad.Nombre = valores[0];
-    cadeteriaCad.Numero = valores[1];
+    cadeteriaCad.Numero = Int64.Parse(valores[1]);
 }
 
 // Creación y adición de cadetes por agregación a la cadetería
@@ -35,7 +35,7 @@ foreach (var linea in lineas2)
 }
 
 //Interfaz
-Console.WriteLine("Bienvenido a la interfaz de la cadetería, ingrese una opción:\n1 - Dar de alta un pedido\n2 -  Asignar un pedido\n3 - Cambiar de estado un pedido\n4 - Reasignar un pedido a otro cadete");
+Console.WriteLine("Bienvenido a la interfaz de la cadetería, ingrese una opción:\n1 - Dar de alta un pedido\n2 - Asignar un pedido\n3 - Cambiar de estado un pedido\n4 - Reasignar un pedido a otro cadete");
 int opcion = int.Parse(Console.ReadLine());
 Console.WriteLine("La opcion es "+ opcion);
 switch (opcion)

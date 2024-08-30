@@ -27,3 +27,4 @@ C:\Users\Alumno\Documents\Taller de Lenguajes II\tl2-tp1-2024-arcthomas\obj\Debu
 C:\Users\Alumno\Documents\Taller de Lenguajes II\tl2-tp1-2024-arcthomas\obj\Debug\net8.0\tl2-tp1-2024-arcthomas.pdb
 C:\Users\Alumno\Documents\Taller de Lenguajes II\tl2-tp1-2024-arcthomas\obj\Debug\net8.0\tl2-tp1-2024-arcthomas.genruntimeconfig.cache
 C:\Users\Alumno\Documents\Taller de Lenguajes II\tl2-tp1-2024-arcthomas\obj\Debug\net8.0\ref\tl2-tp1-2024-arcthomas.dll
+D:\Facultad\Taller de Lenguajes II\TP1\tl2-tp1-2024-arcthomas\obj\Debug\net8.0\tl2-tp1-2024-arcthomas.sourcelink.json

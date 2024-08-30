@@ -4,8 +4,8 @@ public class Cadeteria
 {
     private string nombre;
     private long numero;
-    public string Nombre { get; set; }
-    public string Numero { get; set; }
+    public string Nombre { get => nombre; set => nombre = value;}
+    public long Numero { get => numero; set => numero = value;}
     public List<Cadete> lista_cadetes = new List<Cadete>();
     public Cadeteria(Cadete cadete)
     {
@@ -35,13 +35,13 @@ public class Cadete
 
 public class Pedido
 {
-    private Cliente cliente;
     private int nroPedido;
+    private Cliente cliente;
+    private Estado estado;
     public Pedido()
     {
         Cliente cliente = new Cliente();
     }
-    private Estado estado;
 }
 
 public class Cliente

@@ -4,7 +4,14 @@ public class Cadeteria
 {
     private string nombre;
     private long numero;
-    private List<Cadete> lista_cadetes;
+    public string Nombre { get; set; }
+    public string Numero { get; set; }
+    public List<Cadete> lista_cadetes = new List<Cadete>();
+    public Cadeteria(Cadete cadete)
+    {
+        lista_cadetes.Add(cadete);
+    }
+    public Cadeteria(){}
 }
 
 public class Cadete
@@ -13,7 +20,17 @@ public class Cadete
     private string nombre;
     private string dir;
     private long telefono;
-    private List<Pedido> pedidos;
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+    public string Dir { get; set; }
+    public long Numero { get; set; }
+    private List<Pedido> pedidos = new List<Pedido>();
+    public Cadete(Pedido pedido2)
+    {
+        pedidos.Add(pedido2);
+        Console.WriteLine("asdas");
+    }
+    public Cadete(){}
 }
 
 public class Pedido

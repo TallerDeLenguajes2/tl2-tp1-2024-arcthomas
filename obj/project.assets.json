@@ -8,24 +8,26 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Thomas\\.nuget\\packages\\": {}
+    "C:\\Users\\Alumno\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Facultad\\Taller de Lenguajes II\\TP1\\tl2-tp1-2024-arcthomas\\tl2-tp1-2024-arcthomas.csproj",
+      "projectUniqueName": "C:\\Users\\Alumno\\Documents\\Taller de Lenguajes II\\tl2-tp1-2024-arcthomas\\tl2-tp1-2024-arcthomas.csproj",
       "projectName": "tl2-tp1-2024-arcthomas",
-      "projectPath": "D:\\Facultad\\Taller de Lenguajes II\\TP1\\tl2-tp1-2024-arcthomas\\tl2-tp1-2024-arcthomas.csproj",
-      "packagesPath": "C:\\Users\\Thomas\\.nuget\\packages\\",
-      "outputPath": "D:\\Facultad\\Taller de Lenguajes II\\TP1\\tl2-tp1-2024-arcthomas\\obj\\",
+      "projectPath": "C:\\Users\\Alumno\\Documents\\Taller de Lenguajes II\\tl2-tp1-2024-arcthomas\\tl2-tp1-2024-arcthomas.csproj",
+      "packagesPath": "C:\\Users\\Alumno\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Alumno\\Documents\\Taller de Lenguajes II\\tl2-tp1-2024-arcthomas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Thomas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Alumno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -64,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -3,6 +3,14 @@
 Cadeteria cadeteriaCad = new Cadeteria();
 Pedido unPedido = new Pedido();
 Cadete cadete1 = new Cadete(unPedido);
+Cadete cadete2 = new Cadete
+(
+    23,
+    "Gonzalo",
+    "Av. Oeste 122",
+    23455345
+);
+List<Pedido> listaDePedidos = new List<Pedido>();
 
 // Lectura de archivos
 string archivo = "cadeteria1.csv";
@@ -30,19 +38,87 @@ foreach (var linea in lineas2)
     cadete.Nombre = valores2[1];
     cadete.Dir = valores2[2];
     Int64.TryParse(valores2[3], out num);
-    cadete.Numero = num;
-    cadeteriaCad.lista_cadetes.Add(cadete);
+    cadete.NumeroTel = num;
+    cadeteriaCad.ListaCadetes.Add(cadete);
+    //Console.WriteLine("test");
 }
 
 //Interfaz
-Console.WriteLine("Bienvenido a la interfaz de la cadetería, ingrese una opción:\n1 - Dar de alta un pedido\n2 - Asignar un pedido\n3 - Cambiar de estado un pedido\n4 - Reasignar un pedido a otro cadete");
-int opcion = int.Parse(Console.ReadLine());
-Console.WriteLine("La opcion es "+ opcion);
-switch (opcion)
+int opcion = 0;
+Pedido pedidoEncontrado;
+while (opcion != 5)
 {
-    case 1:
-        Console.WriteLine("A continuación ingrese info del pedido");
-        break;
-    default:
-    break;
+    Console.WriteLine("Bienvenido a la interfaz de la cadetería, ingrese una opción:\n1 - Dar de alta un pedido\n2 - Asignar un pedido\n3 - Cambiar de estado un pedido\n4 - Reasignar un pedido a otro cadete\n5 - Salir");
+    opcion = int.Parse(Console.ReadLine());
+    Console.WriteLine("La opcion es " + opcion);
+    switch (opcion)
+    {
+        case 1:
+            cadeteriaCad.CrearPedido(listaDePedidos);
+            break;
+        case 2:
+            if (listaDePedidos.Count() != 0)
+            {
+                Console.WriteLine("Actualmente hay " + listaDePedidos.Count() + " Pedidos");
+                pedidoEncontrado = cadeteriaCad.EncontrarPedidoPorNro(listaDePedidos);
+                if (pedidoEncontrado != null)
+                {
+                    Console.WriteLine("¡Pedido encontrado!");
+                    Console.WriteLine("Cadetes disponibles: ");
+                    cadeteriaCad.AsignarPedido(cadeteriaCad.EncontrarCadete(cadeteriaCad.ListaCadetes), pedidoEncontrado);
+                }
+                else
+                {
+                    Console.WriteLine("No se encontró el pedido.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay pedidos por el momento");
+            }
+            break;
+        case 3:
+            if (listaDePedidos.Count() != 0)
+            {
+                pedidoEncontrado = cadeteriaCad.EncontrarPedidoPorNro(listaDePedidos);
+                if (pedidoEncontrado != null)
+                {
+                    Console.WriteLine("¡Pedido encontrado!");
+                    cadeteriaCad.CambiarEstado(pedidoEncontrado);
+                }
+                else
+                {
+                    Console.WriteLine("No se encontró el pedido.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay pedidos por el momento");
+            }
+            break;
+        case 4:
+            if (listaDePedidos.Count() != 0)
+            {
+                pedidoEncontrado = cadeteriaCad.EncontrarPedidoPorNro(listaDePedidos);
+                if (pedidoEncontrado != null)
+                {
+                    Console.WriteLine("¡Pedido encontrado!");
+                    cadeteriaCad.ReasignarPedido(cadeteriaCad.EncontrarCadete(cadeteriaCad.ListaCadetes), cadeteriaCad.EncontrarCadete(cadeteriaCad.ListaCadetes), pedidoEncontrado);
+                }
+                else
+                {
+                    Console.WriteLine("No se encontró el pedido.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay pedidos por el momento");
+            }
+            break;
+        case 7:
+            Console.WriteLine("aahgw");
+            break;
+        default:
+            break;
+    }
 }

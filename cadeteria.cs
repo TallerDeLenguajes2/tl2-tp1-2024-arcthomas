@@ -1,4 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using espacioCadete;
+using espacioCliente;
+using espacioPedido;
 
 namespace espacioCadeteria;
 
@@ -83,72 +86,28 @@ public class Cadeteria
                 break;
         }
     }
-}
-
-public class Cadete
-{
-    private int id;
-    private string nombre;
-    private string dir;
-    private long numeroTel;
-    private List<Pedido> pedidos = new List<Pedido>();
-
-    public int Id { get => id; set => id = value; }
-    public string Nombre { get => nombre; set => nombre = value; }
-    public string Dir { get => dir; set => dir = value; }
-    public long NumeroTel { get => numeroTel; set => numeroTel = value; }
-    public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
-    public Cadete(Pedido pedido2)
+    public void MostrarInforme(List<Cadete> cadetes)
     {
-        pedidos.Add(pedido2);
-        Console.WriteLine("asdas");
+        Console.WriteLine("INFORME DE CADETERÍA.");
+        var infoCadetes = from cadete in cadetes
+                          let pedidosEnviadosUnitario = cadete.Pedidos.Where(p => p.Estado.EstadoActual == Estado.Estados.Enviado)
+                          select new
+                          {
+                              pedidosEnviadosUnitario,
+                              Nombre = cadete.Nombre 
+                          };
+        foreach (var cadete in infoCadetes)
+        {
+            Console.WriteLine("Pedidos enviados por el cadete " + cadete.Nombre + ": " + cadete.pedidosEnviadosUnitario.Count());
+            Console.WriteLine("Monto ganado para el cadete " + cadete.Nombre + ": $" + cadete.pedidosEnviadosUnitario.Count()*500);
+            Console.WriteLine("------------------------------------");
+        }
+        var pedidosEnviados = from cadete in cadetes
+                              from pedido in cadete.Pedidos
+                              where pedido.Estado.EstadoActual == Estado.Estados.Enviado
+                              select pedido;
+        Console.WriteLine("Pedidos enviados totales: " + pedidosEnviados.Count());
+        float promedio = (float)pedidosEnviados.Count() / infoCadetes.Count();
+        Console.WriteLine("Promedio de envios por cadetes: " + promedio);
     }
-    public Cadete(int id, string nombre, string dir, long numerotel)
-    {
-        Id = id;
-        Nombre = nombre;
-        Dir = dir;
-        NumeroTel = numeroTel;
-    }
-    public Cadete() { }
-}
-
-public class Pedido
-{
-    private int nroPedido;
-    private Cliente cliente;
-    private Estado estado;
-    public int NroPedido { get => nroPedido; set => nroPedido = value; }
-    public Cliente Cliente { get => cliente; set => cliente = value; }
-    public Estado Estado { get => estado; set => estado = value; }
-    public Pedido()
-    {
-        Cliente cliente = new Cliente();
-        Cliente = cliente;
-    }
-    public Pedido(int nroPedido, Cliente cliente, Estado estado)
-    {
-        NroPedido = nroPedido;
-        Cliente = cliente;
-        Estado = estado;
-    }
-}
-
-public class Cliente
-{
-    private string nombre;
-    private string dir;
-    private long telefono;
-    private string ref_dir;
-}
-
-public class Estado
-{
-    public enum Estados
-    {
-        SinAsignar,
-        EnPreparacion,
-        Enviado
-    }
-    public Estados EstadoActual { get; set; }
 }

@@ -1,4 +1,8 @@
 ﻿using espacioCadeteria;
+using espacioCadete;
+using espacioCliente;
+using espacioPedido;
+
 
 Cadeteria cadeteriaCad = new Cadeteria();
 Pedido unPedido = new Pedido();
@@ -46,9 +50,9 @@ foreach (var linea in lineas2)
 //Interfaz
 int opcion = 0;
 Pedido pedidoEncontrado;
-while (opcion != 5)
+while (opcion != 6)
 {
-    Console.WriteLine("Bienvenido a la interfaz de la cadetería, ingrese una opción:\n1 - Dar de alta un pedido\n2 - Asignar un pedido\n3 - Cambiar de estado un pedido\n4 - Reasignar un pedido a otro cadete\n5 - Salir");
+    Console.WriteLine("Bienvenido a la interfaz de la cadetería, ingrese una opción:\n1 - Dar de alta un pedido\n2 - Asignar un pedido\n3 - Cambiar de estado un pedido\n4 - Reasignar un pedido a otro cadete\n5 - Mostrar informe\n6 - Salir");
     opcion = int.Parse(Console.ReadLine());
     Console.WriteLine("La opcion es " + opcion);
     switch (opcion)
@@ -115,8 +119,8 @@ while (opcion != 5)
                 Console.WriteLine("No hay pedidos por el momento");
             }
             break;
-        case 7:
-            Console.WriteLine("aahgw");
+        case 5:
+            cadeteriaCad.MostrarInforme(cadeteriaCad.ListaCadetes);
             break;
         default:
             break;

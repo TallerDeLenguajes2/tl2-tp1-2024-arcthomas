@@ -10,12 +10,15 @@ public class Cadeteria
     private string nombre;
     private long numero;
     private List<Cadete> listacadetes = new List<Cadete>();
+    private List<Pedido> listapedidos = new List<Pedido>();
     public string Nombre { get => nombre; set => nombre = value; }
     public long Numero { get => numero; set => numero = value; }
     public List<Cadete> ListaCadetes { get => listacadetes; set => listacadetes = value; }
-    public Cadeteria(Cadete cadete)
+    public List<Pedido> ListaPedidos { get => listapedidos; set => listapedidos = value; }
+    public Cadeteria(string nombre, long numero)
     {
-        ListaCadetes.Add(cadete);
+        Nombre = nombre;
+        Numero = numero;
     }
     public Cadeteria() { }
 
@@ -43,7 +46,7 @@ public class Cadeteria
         }
         Console.WriteLine("Seleccione su cadete: ");
         i = int.Parse(Console.ReadLine());
-        return listacadetes[(i - 1)];
+        return listacadetes[i - 1];
     }
     public void CrearPedido(List<Pedido> listaDePedidos)
     {
@@ -59,15 +62,14 @@ public class Cadeteria
         listaDePedidos.Add(nuevoPedido);
         Console.WriteLine("Pedido dado de alta con éxito.");
     }
-    public void AsignarPedido(Cadete cadete, Pedido pedido)
+    public void AsignarCadeteAPedido(Cadete cadete, Pedido pedido)
     {
-        cadete.Pedidos.Add(pedido);
+        pedido.Cadete = cadete;
         pedido.Estado.EstadoActual = Estado.Estados.EnPreparacion;
     }
-    public void ReasignarPedido(Cadete cadete1, Cadete cadete2, Pedido pedido)
+    public void ReasignarPedido(Pedido pedido, Cadete cadeteExchange)
     {
-        cadete1.Pedidos.Remove(pedido);
-        cadete2.Pedidos.Add(pedido);
+        pedido.Cadete = cadeteExchange;
     }
     public void CambiarEstado(Pedido pedido)
     {
@@ -86,28 +88,43 @@ public class Cadeteria
                 break;
         }
     }
-    public void MostrarInforme(List<Cadete> cadetes)
+    public void MostrarInforme()
     {
         Console.WriteLine("INFORME DE CADETERÍA.");
-        var infoCadetes = from cadete in cadetes
-                          let pedidosEnviadosUnitario = cadete.Pedidos.Where(p => p.Estado.EstadoActual == Estado.Estados.Enviado)
-                          select new
-                          {
-                              pedidosEnviadosUnitario,
-                              Nombre = cadete.Nombre 
-                          };
-        foreach (var cadete in infoCadetes)
+        foreach (var cadete in ListaCadetes)
         {
-            Console.WriteLine("Pedidos enviados por el cadete " + cadete.Nombre + ": " + cadete.pedidosEnviadosUnitario.Count());
-            Console.WriteLine("Monto ganado para el cadete " + cadete.Nombre + ": $" + cadete.pedidosEnviadosUnitario.Count()*500);
+            var PedidosUnitarios = from pedido in ListaPedidos
+                                   where pedido.Cadete == cadete && pedido.Estado.EstadoActual == Estado.Estados.Enviado
+                                   select pedido;
+            Console.WriteLine("Pedidos enviados por el cadete " + cadete.Nombre + ": " + PedidosUnitarios.Count());
+            Console.WriteLine("Monto ganado para el cadete " + cadete.Nombre + ": $" + PedidosUnitarios.Count() * 500);
             Console.WriteLine("------------------------------------");
         }
-        var pedidosEnviados = from cadete in cadetes
-                              from pedido in cadete.Pedidos
+        var pedidosEnviados = from pedido in ListaPedidos
                               where pedido.Estado.EstadoActual == Estado.Estados.Enviado
                               select pedido;
         Console.WriteLine("Pedidos enviados totales: " + pedidosEnviados.Count());
-        float promedio = (float)pedidosEnviados.Count() / infoCadetes.Count();
+        float promedio = (float)pedidosEnviados.Count() / ListaCadetes.Count();
         Console.WriteLine("Promedio de envios por cadetes: " + promedio);
+    }
+
+    public void JornarACobrar(int id)
+    {
+        var pedidos = from pedido in ListaPedidos
+                      where pedido.Cadete.Id == id && pedido.Estado.EstadoActual == Estado.Estados.Enviado
+                      select new
+                      {
+                          Nombre = pedido.Cadete.Nombre,
+                          pedido
+                      };
+        var primerPedido = pedidos.FirstOrDefault();
+        if (primerPedido != null)
+        {
+            Console.WriteLine("El jornal a cobrar del Cadete " + primerPedido.Nombre + "es $" + pedidos.Count() * 500);
+        }
+        else
+        {
+            Console.WriteLine("No se encontraron pedidos enviados para el cadete " + ListaCadetes[id-1].Nombre);
+        }
     }
 }

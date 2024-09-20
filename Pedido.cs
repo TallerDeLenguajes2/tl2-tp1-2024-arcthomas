@@ -8,9 +8,11 @@ public class Pedido
     private int nroPedido;
     private Cliente cliente;
     private Estado estado;
+    private Cadete cadete;
     public int NroPedido { get => nroPedido; set => nroPedido = value; }
     public Cliente Cliente { get => cliente; set => cliente = value; }
     public Estado Estado { get => estado; set => estado = value; }
+    public Cadete Cadete { get => cadete; set => cadete = value; }
     public Pedido()
     {
         Cliente cliente = new Cliente();

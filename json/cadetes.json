@@ -1,0 +1,14 @@
+[
+    {
+        "Id": 1,
+        "Nombre": "Pablo",
+        "Dir": "Tucuman",
+        "NumeroTel": 12323232
+    },
+    {
+        "Id": 2,
+        "Nombre": "Lisandro",
+        "Dir": "Tucuman",
+        "NumeroTel": 32122234
+    }
+]
